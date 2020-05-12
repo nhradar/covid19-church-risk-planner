@@ -9,7 +9,9 @@
 ## ---------------------------
 library(shiny)
 library(shinythemes)
-
+library(shinyWidgets)
+daily_plots_dir = list.dirs('www/daily_risk_plots/', full.names=F)[-1]
+names(daily_plots_dir) = ymd_hms(daily_plots_dir)
 options(scipen = 999)
 shinyUI(fluidPage(theme = shinytheme("sandstone"),
     tags$head(includeHTML(("www/ga.html"))),

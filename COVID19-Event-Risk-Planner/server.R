@@ -74,13 +74,21 @@ shinyServer(function(input, output, session) {
     "VA" = "VA.png", "VT" = "VT.png", "WA" = "WA.png", "WI" = "WI.png",
     "WV" = "WV.png", "WY" = "WY.png"
   )
-  updateSelectizeInput(session, "regions", choices = regions, selected = "states-alpha.png")
-  daily_plots_dir <- list.dirs("www/daily_risk_plots/", full.names = F)
-  names(daily_plots_dir) <- ymd_hms(daily_plots_dir, tz = "Eastern")
-  updateSelectizeInput(session, "date", choices = rev(daily_plots_dir), selected = tail(daily_plots_dir, 1))
-
-  output$risk_plots <- renderImage(
-    {
+    updateSelectizeInput(session, "regions", choices = regions, selected = "states-alpha.png")
+    daily_plots_dir = list.dirs('www/daily_risk_plots/', full.names=F)[-1]
+    names(daily_plots_dir) = ymd_hms(daily_plots_dir)
+    # cat(names(daily_plots_dir), "\n")
+    # updateSliderTextInput(
+    #       session = session,
+    #       inputId = "date",
+    #       choices = names(daily_plots_dir),
+    #       selected = names(rev(daily_plots_dir))[1],
+    #       from = names(daily_plots_dir)[1],
+    #       to = names(rev(daily_plots_dir))[1]
+    # )    
+    output$risk_plots <- renderImage({
+        if (input$date == ".")
+            return
       risk_folder <- paste0("www/daily_risk_plots/", input$date)
       region <- input$regions
       # if (is.null(region))
