@@ -10,12 +10,12 @@ library(lubridate)
 library(mapview)
 library(matlab)
 library(RCurl)
-library(rtweet)
+#library(rtweet)
 library(sf)
 library(withr)
 
 
-get_token()
+#get_token()
 
 pcrit <- function(x) {
   0.01 / x
@@ -172,6 +172,6 @@ annotate_figure(p,
 )
 dev.off()
 
-post_tweet(status=paste0("State-level risk estimate update for ", ymd_hms(current_time)), media=paste0('www/daily_risk_plots/', current_time,"/states-rank.png" ))
+#post_tweet(status=paste0("State-level risk estimate update for ", ymd_hms(current_time)), media=paste0('www/daily_risk_plots/', current_time,"/states-rank.png" ))
 
 

@@ -21,7 +21,7 @@ library(leaflet)
 library(mapview)
 #library(mapview, lib.loc = "/projects/covid19/covid19/R/x86_64-redhat-linux-gnu-library/3.6/")
 
-Sys.setenv(PATH = with_path('/projects/covid19/bin', Sys.getenv("PATH")))
+#Sys.setenv(PATH = with_path('/projects/covid19/bin', Sys.getenv("PATH")))
 
 pcrit <- function(x) {
   0.01 / x

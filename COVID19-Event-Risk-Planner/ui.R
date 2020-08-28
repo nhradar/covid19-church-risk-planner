@@ -39,7 +39,8 @@ shinyUI(fluidPage(
   tags$script(inactivity), 
   tags$head(
     includeHTML(("www/ga.html")),
-    includeHTML(("www/mt.html")),
+    #it's not in githumb. What does it do? Who knows? -NW
+    #includeHTML(("www/mt.html")),
     tags$style(
       ".map-container {
           height: 600px;
@@ -81,7 +82,8 @@ shinyUI(fluidPage(
           width=2,
         HTML(
           paste0(
-            "<p>This map shows the risk level of attending an event, given the event size and location.",
+            "<p>Bittercow has adapted <a href='http://covid19risk.biosci.gatech.edu'> Georgia Tech's fine work</a> to provide risk estimates at slightly different numbers relevant to many smaller churches. This map shows the risk level of attending an event in a location, given the size of the event and the county.",
+	    "<p>This map shows the risk level of attending an event, given the event size and location.",
             "<br/><br/>",
             "The risk level is the estimated chance (0-100%) that at least 1 COVID-19 positive individual will be present at an event in a county, given the size of the event.",
             "<br/><br/>", "Based on seroprevalence data, we assume there are ten times more cases than are being reported (10:1 ascertainment bias). In places with more testing availability, that rate may be lower.",
@@ -92,8 +94,8 @@ shinyUI(fluidPage(
         shinyWidgets::sliderTextInput(
               "event_size_map",
               "Event Size: ",
-              choices = c(10, 25, 50, 100, 500, 1000, 5000, 10000),
-              selected = 100,
+              choices = c(10, 20, 30, 40, 50, 60),
+              selected = 40,
               grid = T
             ),
         shinyWidgets::awesomeRadio(
@@ -205,47 +207,48 @@ shinyUI(fluidPage(
         )
       )
     ),
-    #
-    tabPanel(
-      id = "risk_estimates",
-      "Continuous risk estimates",
-      fluid = TRUE,
-      sidebarLayout(
-        sidebarPanel(
-          width=3,
-          HTML(
-            "<p>The curved lines (risk estimates) are based on real-time COVID19 surveillance data.
-                  They represent estimates given the current reported incidence (dashed line) [C<sub>I</sub>]: 5x the current incidence (blue), 10x (yellow), and 20x (red).
-                  These estimates help understand the effects of potential under-testing and reporting of COVID19 incidence.</p>
-                  <p>Select from a mosiac of all 50 states, ordered alphabetically or by their population-adjusted incidence, or zoom in to individual states.</p>"
-          ),
-          selectizeInput("regions", "Select region", c()),
-          selectizeInput("date", "Select a date to view", c()),
-          p(
-            "Estimates are updated every day at midnight and 12:00 (timezone=America/New_York)"
-          ),
-          downloadButton("dl_risk", "Download plot")
-        ),
-        mainPanel(plotOutput(
-          "risk_plots",
-          width = "900px", height = "900px"
-        ))
-      )
-    ),
-    tabPanel(
-      id = "previous",
-      "Previously Released Charts",
-      fluid = TRUE,
-      mainPanel(
-        tags$img(src = "twitter_image_031020.jpg"),
-        tags$br(),
-        tags$br(),
-        tags$img(src = "figevent_checker_apr30.png"),
-        tags$br(),
-        tags$br(),
-        tags$img(src = "figevent_checker_georgia_042720.jpg  ")
-      )
-    ),
+    #This isn't working and I don't know why and don't want it anyway, so let's take it out. -NW
+    #tabPanel(
+    #  id = "risk_estimates",
+    #  "Continuous risk estimates",
+    #  fluid = TRUE,
+    #  sidebarLayout(
+    #    sidebarPanel(
+    #      width=3,
+    #      HTML(
+    #        "<p>The curved lines (risk estimates) are based on real-time COVID19 surveillance data.
+    #              They represent estimates given the current reported incidence (dashed line) [C<sub>I</sub>]: 5x the current incidence (blue), 10x (yellow), and 20x (red).
+    #              These estimates help understand the effects of potential under-testing and reporting of COVID19 incidence.</p>
+    #              <p>Select from a mosiac of all 50 states, ordered alphabetically or by their population-adjusted incidence, or zoom in to individual states.</p>"
+    #      ),
+    #      selectizeInput("regions", "Select region", c()),
+    #      selectizeInput("date", "Select a date to view", c()),
+    #      p(
+    #        "Estimates are updated every day at midnight and 12:00 (timezone=America/New_York)"
+    #      ),
+    #      downloadButton("dl_risk", "Download plot")
+    #    ),
+    #    mainPanel(plotOutput(
+    #      "risk_plots",
+    #      width = "900px", height = "900px"
+    #    ))
+    #  )
+    #),
+    #This is also not pertinent for our needs. -NW
+     #tabPanel(
+     # id = "previous",
+     # "Previously Released Charts",
+     # fluid = TRUE,
+     # mainPanel(
+     #   tags$img(src = "twitter_image_031020.jpg"),
+     #   tags$br(),
+     #   tags$br(),
+     #   tags$img(src = "figevent_checker_apr30.png"),
+     #   tags$br(),
+     #   tags$br(),
+     #   tags$img(src = "figevent_checker_georgia_042720.jpg  ")
+     # )
+    #),
     tabPanel(
       id = "tuts",
       "Tutorial",
