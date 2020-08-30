@@ -298,10 +298,12 @@ shinyUI(fluidPage(
     ), column(2)
       )
 ),
-   tags$script(HTML(
-     "$(document).on('shiny:inputchanged', function(event) {
-        _paq.push(['trackEvent', 'input', 
-          'userActivity', event.name, event.value]);
-     });"
-  )),
+#This has to do with tracking stuff we don't do, and the map doesn't redraw
+	    # because javascript quits when _paq isn't there.
+#   tags$script(HTML(
+#     "$(document).on('shiny:inputchanged', function(event) {
+#        _paq.push(['trackEvent', 'input', 
+#          'userActivity', event.name, event.value]);
+#     });"
+#  )),
 ))
